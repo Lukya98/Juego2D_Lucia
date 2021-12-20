@@ -8,11 +8,13 @@ TagManager:
   - Torreta
   - Robot
   - Trampa
+  - Bala
+  - Escenario
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Entorno
   - Water
   - UI
   - 

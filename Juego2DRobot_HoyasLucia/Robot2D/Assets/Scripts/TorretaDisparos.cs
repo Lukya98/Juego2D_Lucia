@@ -28,8 +28,8 @@ public class TorretaDisparos : MonoBehaviour
     }
     public void ActivarTorreta()
     {
-        print(script.patata);
-        if (script.patata==true)
+        //print(script.estoydentro);
+        if (script.estoydentro==true)
         {
             TorretaAnimator.SetBool("Trampa", true);
         }

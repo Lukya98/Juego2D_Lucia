@@ -8,7 +8,7 @@ public class TorretaTrampa : MonoBehaviour
     
     //[SerializeField] GameObject[] torretas;
 
-    public bool patata;
+    public bool estoydentro;
 
 
     // Start is called before the first frame update 
@@ -31,14 +31,11 @@ public class TorretaTrampa : MonoBehaviour
     //Robot toca la trampa y dispara mientras esta dentro 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        print("Colision");
+        //print("Colision");
         if (other.gameObject.name == "Robot")
         {
-            patata=true;
-        }
-        else
-        {
-            patata=false;
+            estoydentro=true;
+           // print(gameObject.name);
         }
 
         /* print("Colision");
@@ -56,7 +53,7 @@ public class TorretaTrampa : MonoBehaviour
       {
         if (other.gameObject.name == "Robot")
         {
-            patata=false;
+            estoydentro=false;
         }
         /* if (other.gameObject.name == "Robot")
          {

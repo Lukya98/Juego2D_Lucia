@@ -9,9 +9,9 @@ public class PlayerManager : MonoBehaviour
     float speed; //Velocidad en X a la que me muevo
     [SerializeField] float maxSpeed; //Velocidad de desplazamiento máxima
     float desplX;
-    float jumpForce;
-    bool alive = true;
-    
+    [SerializeField] float jumpForce;
+    public bool alive = true;
+
     //bool facingRight = true;
     private SpriteRenderer Spriteflip;
     // Start is called before the first frame update
@@ -20,9 +20,9 @@ public class PlayerManager : MonoBehaviour
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         maxSpeed = 3.5f;
-        jumpForce = 10f;
+        jumpForce = 24f;
         Spriteflip = GetComponent<SpriteRenderer>();
-        
+
     }
     // Update is called once per frame
     void Update()
@@ -34,7 +34,7 @@ public class PlayerManager : MonoBehaviour
             Saltar();
             Crouch();
             Roll();
-            
+
             Run();
         }
     }
@@ -55,7 +55,7 @@ public class PlayerManager : MonoBehaviour
     void Girar()
     {
 
-        if(rb.velocity.x < 0)
+        if (rb.velocity.x < 0)
         {
             Spriteflip.flipX = true;
         }
@@ -63,16 +63,16 @@ public class PlayerManager : MonoBehaviour
         {
             Spriteflip.flipX = false;
         }
-       /* if (desplX < 0 && facingRight)
-        {
-            transform.localScale = new Vector3(-1f, 1f, 1f);
-            facingRight = false;
-        }
-        else if (desplX > 0 && !facingRight)
-        {
-            transform.localScale = new Vector3(1f, 1f, 1f);
-            facingRight = true;
-        }*/
+        /* if (desplX < 0 && facingRight)
+         {
+             transform.localScale = new Vector3(-1f, 1f, 1f);
+             facingRight = false;
+         }
+         else if (desplX > 0 && !facingRight)
+         {
+             transform.localScale = new Vector3(1f, 1f, 1f);
+             facingRight = true;
+         }*/
     }
     void Saltar()
     {
@@ -97,14 +97,14 @@ public class PlayerManager : MonoBehaviour
         {
             animator.SetBool("Crouch", true);
             maxSpeed = 1.5f;
-           
+
 
         }
         else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             animator.SetBool("Crouch", false);
             maxSpeed = 3.5f;
-            
+
 
         }
     }
@@ -134,17 +134,18 @@ public class PlayerManager : MonoBehaviour
             maxSpeed = 3.5f;
         }
     }
+
     //Control de suelo
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.layer == 6)
         {
-            //print("Estoy tocando suelo");
+            print("Estoy tocando suelo");
             animator.SetBool("IsGrounded", true);
         }
         if (collision.gameObject.tag == "Plataforma")
-            
-{
+
+        {
             transform.parent = collision.gameObject.transform;
         }
 
@@ -161,8 +162,13 @@ public class PlayerManager : MonoBehaviour
             transform.parent = null;
         }
     }
-    
-  
+    public void Morir()
+    {
+        animator.SetTrigger("death");
+
+        alive = false;
+
+    }
 }
 
 
